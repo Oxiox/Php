@@ -1,0 +1,19 @@
+<?php
+$link = mysqli_connect("localhost","root","");
+ $username = $_POST['user1'];
+ $password = $_POST['pass1'];
+ $username = stripcslashes($username);
+ $password = stripcslashes($password);
+ $username = mysqli_real_escape_string($link,$username);
+ $password = mysqli_real_escape_string($link,$password);
+mysqli_select_db($link ,"test1");
+ $res = mysqli_query($link,"select * from login where u_name = '$username' and u_pass = '$password'")or die("you have error in ".mysql_error());
+ $row = mysqli_fetch_array($res);
+ if ($row['u_name'] == $username && $row['u_pass'] == $password)
+ {
+	 header("location:page1.php");
+ exit();
+
+ }else{
+	 echo "error";
+ }

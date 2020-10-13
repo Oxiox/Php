@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>add</title>
+<link href="./rsn/insert.css" rel="stylesheet" type="text/css">
+</head>
+<body  background="D:\Users\alaba\Downloads\block-chain-2853002_1920.jpg" >
+<form dir="rtl" action="#" method="post">
+<h2>اضافة موظف جديد</h2>
+<h4>الرجاء ادخال البيانات</h4>
+<label>الاسم:</label>
+<input class="input" name="name" type="text" value="">
+<label>البريد الالكتروني:</label>
+<input class="input" name="email" type="text" value="">
+<label>اسم المستخدم:</label>
+<input class="input" name="username" type="text" value="">
+<label>كلمة السر:</label>
+<input class="input" name="pass" type="password" value=""><br>
+<label>العنوان:</label>
+<input class="input" name="addr" type="text" value=""><br>
+<label>الهاتف:</label>
+<input class="input" name="ph" type="text" value=""><br>
+<label>رمز المستخدم:</label>
+<input class="input" name="co" type="text" value=""><br>
+<input class="submit" name="submit" type="submit" value="اضافة">
+</form>
+<?php
+if (isset($_POST['submit'])) {
+	mysqli_query("SET NAMES 'utf8'");
+mysqli_query("SET CHARACTER SET 'utf8'");
+mb_internal_encoding("UTF-8");
+$link = mysqli_connect("localhost","root","");
+ $emn = $_POST['name'];
+ $email = $_POST['email'];
+ $usern = $_POST['username'];
+ $pass = $_POST['pass'];
+ $adress = $_POST['addr'];
+ $phon = $_POST['ph'];
+ $ucod = $_POST['co'];
+ 
+ $emn = stripcslashes($emn);
+ $email = stripcslashes($email);
+ $usern = stripcslashes($usern);
+ $pass = stripcslashes($pass);
+  $adress = stripcslashes($adress);
+ $phon = stripcslashes($phon);
+ $ucod = stripcslashes($ucod);
+
+	 mysqli_select_db($link ,"ammar");
+ $res ="INSERT INTO `employ` (`name`, `email`, `username`, `password`, `address`, `phon`,`id`)VALUES('$emn','$email','$usern','$pass','$adress','$phon','$ucod')";
+ 
+ 
+ 
+		if(mysqli_query($link,$res))
+		{
+			$message = "Inserted successfully..!";
+echo "<script type='text/javascript'>alert('$message');</script>";
+			
+			
+		}
+	else
+	{
+		$message = "Please fill all the fields..!";
+echo "<script type='text/javascript'>alert('$message');</script>";
+		
+		}
+}
+		?>
+</body>
+</html>
